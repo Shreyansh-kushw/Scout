@@ -1,17 +1,36 @@
-from langchain.messages import SystemMessage
-from langchain_core.runnables import Runnable
+from langchain.messages import SystemMessage, HumanMessage
+import json
 
 from app.utils import prompts
+from app.agent import small_model
 
 
-def evaluate_info(state: dict, model_with_tools: Runnable):
+def evaluate_info(state: dict):
     """Node to evaluate info quality"""
 
-    return {
-        "gaps": model_with_tools.invoke(
+    gaps = small_model.invoke(
             [SystemMessage(content=prompts.EVALUATE_INFO_SYSTEM_PROMPT)]
-            + state["question"]
-            + state["queries"]
-            + state["search_results"]
-        )
+            + [
+                HumanMessage(
+                    content=f"""
+Original question: {state['question']}
+
+Queries already searched: 
+{"\n".join([f"-{q}" for q in state["queries"]])}
+
+Information already gathered:
+{"\n".join([f'- {r.get("title", "No Title")}: {r.get("content", "")[:50]}' for r in state["search_results"]])}
+
+Based on the above, identify any gaps as a JSON array. If sufficient, return [].
+""")]).content
+    
+    try:
+        gaps = json.loads(gaps)
+    
+    except:
+        print("GAP ERROR")
+        print(gaps)
+
+    return {
+        "gaps": gaps     
     }
