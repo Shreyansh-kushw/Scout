@@ -24,9 +24,18 @@ def search_query(state: dict) -> dict:
 
     results = []
 
-    for query in state['queries']:
+    if not state["gaps"]:
 
-        observation = tavily.tavily_tool.invoke(query=query)
+        for query in state['queries']:
+            observation = tavily.tavily_tool.invoke(query=query)
+            results.append([ToolMessage(content=observation)])
+
+        return {
+            "search_results": results
+        }
+    
+    for gap in state["gaps"]:
+        observation = tavily.tavily_tool.invoke(query=gap)
         results.append([ToolMessage(content=observation)])
 
     return {
