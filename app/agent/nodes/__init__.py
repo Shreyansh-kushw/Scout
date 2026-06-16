@@ -129,5 +129,67 @@ If the research is sufficient:
 def synthesize_response(state: dict, synthesis_model: Runnable):
     """Node for synthesizing final response"""
 
-    
+    return {
+        "final_response": synthesis_model.invoke(
+            [
+                SystemMessage(
+                    content="""
+You are an expert research analyst.
+
+Answer the user's question using the evidence below.
+
+QUESTION:
+{user_question}
+
+EVIDENCE:
+{research_results}
+
+Requirements:
+
+1. First determine the user's actual decision, problem, or information need.
+2. Synthesize evidence across sources into a single coherent answer.
+3. Eliminate redundant points.
+4. Give more weight to:
+   - Primary sources
+   - Official documentation
+   - Recent information
+   - Consensus across sources
+5. Explicitly identify:
+   - Facts
+   - Inferences
+   - Uncertainties
+6. If the question asks for a recommendation:
+   - State the recommendation clearly.
+   - Explain tradeoffs.
+   - Explain when the recommendation would change.
+7. If the question asks for a comparison:
+   - Include a comparison table.
+   - Highlight major differences.
+   - Conclude with best-fit scenarios.
+8. If the question asks for a "should I" decision:
+   - Provide a clear recommendation.
+   - Support it with evidence.
+9. Never fabricate information.
+10. Never cite evidence that is not present.
+
+Generate a polished final response using markdown.
+
+Structure:
+
+# Answer
+
+# Evidence Summary
+
+# Analysis
+
+# Recommendation (if applicable)
+
+# Caveats
+"""
+                )
+            ]
+            + state["question"]
+            + state["search_results"]
+        )
+    }
     
