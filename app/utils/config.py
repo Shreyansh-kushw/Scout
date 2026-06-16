@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     synthesis_model: str
     groq_api_key: str
     gemini_api_key: str
+    tavily_api_key: str
 
 
 settings = Settings()
