@@ -2,7 +2,7 @@ from langchain.messages import SystemMessage, HumanMessage
 import json
 
 from app.utils import prompts
-from app.agent import small_model
+from app.agent.agent import small_model
 
 
 def evaluate_info(state: dict):

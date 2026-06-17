@@ -1,17 +1,40 @@
-from langchain.chat_models import init_chat_model
+from typing import Literal
+from langgraph.graph import StateGraph, START, END
 
-from app.utils.config import settings
+from app.agent.state import ResearchState
+from app.agent.nodes.decompose import decompose_query
+from app.agent.nodes.evaluate import evaluate_info
+from app.agent.nodes.search import search_query
+from app.agent.nodes.synthesise import synthesize_response
 
-small_model = init_chat_model(
-    model=settings.evaluation_query_model,
-    model_provider="groq",
-    temperature=0,
-    api_key=settings.groq_api_key,
+
+def should_continue(
+    state: ResearchState,
+    max_iteration: int = 4,
+) -> Literal["search_query", "synthesize_response"]:
+    """Fuction that looks at the current state of reasoning to decide whether to continue with a tool call or end the reasoning with an answer"""
+
+    if state.get("iterations", 0) >= max_iteration:
+        return "synthesize_response"
+
+    if state["gaps"]:
+        return "search_query"
+    return "synthesize_response"
+
+
+agent_builder = StateGraph(ResearchState)
+
+agent_builder.add_node("decompose_query", decompose_query)
+agent_builder.add_node("evaluate_info", evaluate_info)
+agent_builder.add_node("search_query", search_query)
+agent_builder.add_node("synthesize_response", synthesize_response)
+
+agent_builder.add_edge(START, "decompose_query")
+agent_builder.add_edge("decompose_query", "search_query")
+agent_builder.add_edge("search_query", "evaluate_info")
+agent_builder.add_conditional_edges(
+    "evaluate_info", should_continue, ["search_query", "synthesize_response"]
 )
+agent_builder.add_edge("synthesize_response", END)
 
-synthesis_model = init_chat_model(
-    model=settings.synthesis_model,
-    model_provider="google_genai",
-    temperature=1,
-    api_key=settings.gemini_api_key,
-)
+agent = agent_builder.compile()

@@ -1,4 +1,4 @@
-from app.agent.graph import agent
+from app.agent import agent
 
 question = "How is the current scene of affairs with the upcoming NEET re-examination conducted by NTA?"
 
