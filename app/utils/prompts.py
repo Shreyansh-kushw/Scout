@@ -138,7 +138,7 @@ Only include if there are conflicting sources, genuine tradeoffs, or nuances not
 ## Caveats
 Limitations, uncertainties, or missing information only. Skip this section entirely if none are significant.
 
-## Sources - Very important, never skip this
+## Sources (- Very important, never skip this)
 List every source cited above, numbered to match inline citations.
 Format each line exactly as:
 [1]. Title — URL <br> (Add this after every source to ensure line breaks in markdown)
