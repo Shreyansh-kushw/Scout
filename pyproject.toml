@@ -12,6 +12,5 @@ dependencies = [
     "fastapi",
     "uvicorn",
     "pydantic-settings",
-    "langchain-tavily>=0.2.18",
     "tavily>=1.1.0",
 ]
