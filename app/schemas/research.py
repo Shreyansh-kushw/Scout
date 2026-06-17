@@ -1,9 +1,5 @@
 from pydantic import BaseModel
 
-class ResearchRequest(BaseModel):
-
-    question: str
-
 class SourceItem(BaseModel):
     title: str
     url: str
