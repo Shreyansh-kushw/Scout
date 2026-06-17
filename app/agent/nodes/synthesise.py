@@ -6,8 +6,13 @@ from app.agent import synthesis_model
 
 def synthesize_response(state: dict):
     """Node for synthesizing final response"""
-        
-    source_text = "\n\n".join([f"[{i+1}] {result.get('title', 'No title')}\nContent: {result.get('content', '')}\nURL: {result.get('url', 'No URL')}" for i, result in enumerate(state['search_results'])])
+
+    source_text = "\n\n".join(
+        [
+            f"[{i + 1}] {result.get('title', 'No title')}\nContent: {result.get('content', '')}\nURL: {result.get('url', 'No URL')}"
+            for i, result in enumerate(state["search_results"])
+        ]
+    )
 
     return {
         "final_response": synthesis_model.invoke(
