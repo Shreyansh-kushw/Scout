@@ -14,6 +14,8 @@ Rules:
 - If the question involves comparisons, generate queries for each item individually and for direct comparisons.
 - If the question requires current information, include terms indicating recency.
 - Generate between 5 and 8 queries. No more, no less.
+- For questions about current events or ongoing situations, always include 
+  "2026" or "latest" or "recent" in your search queries to prioritize fresh results.
 
 Output:
 Return ONLY a valid JSON array of strings. No markdown. No explanation. Start with [ and end with ].
@@ -99,6 +101,7 @@ Requirements:
    - Use numbered citations matching the source list: [1], [3], [6][9]
    - Place citations immediately after the statement they support.
    - Never invent citations. Never cite sources that don't support the claim.
+   - Citation format: [1][3][6] — each number in its own bracket, no commas, no spaces between brackets.
 
 7. If the question asks for a recommendation: state it clearly, explain tradeoffs, explain when it would change.
 8. If the question asks for a comparison: include a comparison table, highlight differences, conclude with best-fit scenarios.
@@ -118,7 +121,6 @@ Limitations, uncertainties, or missing information only. Skip if none are signif
 
 # Sources (MANDATORY — never skip this section)
 List every source cited above, numbered to match inline citations.
-List one source only once, do not repeat the sources. And make sure the citations above correspond to the correct source.
 Format: [number]. Title — URL
 Example:
 [1]. What is self-attention? | IBM — https://www.ibm.com/think/topics/self-attention

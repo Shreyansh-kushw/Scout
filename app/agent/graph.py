@@ -10,10 +10,11 @@ from app.agent.nodes.synthesise import synthesize_response
 
 def should_continue(
     state: ResearchState,
+    max_iteration: int = 4,
 ) -> Literal["search_query", "synthesize_response"]:
     """Fuction that looks at the current state of reasoning to decide whether to continue with a tool call or end the reasoning with an answer"""
 
-    if state.get("iterations", 0) >= 3:
+    if state.get("iterations", 0) >= max_iteration:
         return "synthesize_response"
 
     if state["gaps"]:

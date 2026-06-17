@@ -1,6 +1,6 @@
 from app.agent.graph import agent
 
-question = "How does the Transformer architecture work?"
+question = "How is the current scene of affairs with the upcoming NEET re-examination conducted by NTA?"
 
 result = agent.invoke({"question": question})
 
