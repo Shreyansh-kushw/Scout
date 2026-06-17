@@ -3,24 +3,26 @@ from fastapi.exceptions import HTTPException
 from typing import Annotated
 
 from app.agent import agent
-from app.schemas.research import research
+from app.schemas.research import ResearchResponse, SourceItem
 
 app = FastAPI()
 
-@app.get("/research", response_model= research)
+@app.get("/research", response_model= ResearchResponse)
 async def research_query(
     question:  Annotated[str | None, Query(description="Question to be researched.")],
 ):
     if question:
 
         response = agent.invoke({"question": question})
-        result = research(
+        result = ResearchResponse(
             question= response["question"],
             queries=response["queries"],
-            search_results=response["search_results"],
-            gaps = response["gaps"],
             iterations=response["iterations"],
-            final_response=response["final_response"],
+            sources=[SourceItem(
+                title=r.get("title", "No title"),
+                url= r.get("url", "No URL")
+            ) for r in response["search_results"]],
+            report=response["final_response"],
         )
 
         return result
