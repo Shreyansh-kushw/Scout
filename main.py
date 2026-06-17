@@ -1,25 +1,29 @@
+from fastapi import FastAPI, Query, status
+from fastapi.exceptions import HTTPException
+from typing import Annotated
+
 from app.agent import agent
+from app.schemas.research import research
 
-question = "How is the current scene of affairs with the upcoming NEET re-examination conducted by NTA?"
+app = FastAPI()
 
-result = agent.invoke({"question": question})
+@app.get("/research", response_model= research)
+async def research_query(
+    question:  Annotated[str | None, Query(description="Question to be researched.")],
+):
+    if question:
 
-print("\n" + "=" * 60)
-print("RESEARCH COMPLETE")
-print("=" * 60)
+        response = agent.invoke({"question": question})
+        result = research(
+            question= response["question"],
+            queries=response["queries"],
+            search_results=response["search_results"],
+            gaps = response["gaps"],
+            iterations=response["iterations"],
+            final_response=response["final_response"],
+        )
 
-print(f"\nQuestion: {result['question']}")
-print(f"Iterations: {result['iterations']}")
-print(f"Queries used: {len(result['queries'])}")
-
-print("\nQueries:")
-for i, q in enumerate(result["queries"], 1):
-    print(f"  {i}. {q}")
-
-print(f"\nSources gathered: {len(result['search_results'])}")
-
-print("\n" + "-" * 60)
-print("FINAL REPORT")
-print("-" * 60)
-print(result["final_response"])
-print("=" * 60 + "\n")
+        return result
+    
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Search query not provided.")
+    

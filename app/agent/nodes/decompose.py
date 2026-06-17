@@ -2,7 +2,7 @@ from langchain.messages import SystemMessage, HumanMessage
 import json
 
 from app.utils import prompts
-from app.agent.agent import small_model
+from app.agent.models import small_model
 
 
 def decompose_query(state: dict) -> list[str]:

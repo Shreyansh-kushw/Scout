@@ -1,7 +1,7 @@
 from langchain.messages import SystemMessage, HumanMessage
 from app.utils import prompts
 
-from app.agent.agent import synthesis_model
+from app.agent.models import synthesis_model
 
 
 def synthesize_response(state: dict):
