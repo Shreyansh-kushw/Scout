@@ -1,5 +1,5 @@
 // Configurable API URL - equivalent to an environment variable for this static frontend
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'https://scout-xz2j.onrender.com';
 
 const queryInput = document.getElementById('query-input');
 const researchBtn = document.getElementById('research-btn');
