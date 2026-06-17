@@ -14,6 +14,8 @@ def synthesize_response(state: dict):
         ]
     )
 
+    print("Synthesizing response.")
+
     return {
         "final_response": synthesis_model.invoke(
             [SystemMessage(content=prompts.SYNTHESIZE_RESPONSE_SYSTEM_PROMPT)]

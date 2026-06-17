@@ -114,6 +114,26 @@ curl -G "http://localhost:8000/research" \
      --data-urlencode "question=What are the latest breakthroughs in solid-state battery technology for 2026?"
 ```
 
+## Example
+
+**Query**
+> What has lead to the recent crackdown of the U.S. government on Anthropic?
+
+**Response**
+
+The U.S. government's recent crackdown on Anthropic, primarily occurring in 2026, stemmed from a multi-faceted dispute concerning national security, control over advanced AI capabilities, and Anthropic's policy on technology use [2][7][15][16][18][27].
+
+## Reasons for the Crackdown
+
+### Refusal to Waive "Red Lines"
+A primary catalyst for the government's action was Anthropic CEO Dario Amodei's refusal to comply with demands from Defense Secretary Pete Hegseth [2][10]. Hegseth pressured Amodei to remove "red lines" that restricted the use of Anthropic's AI model, Claude, for **mass domestic surveillance** and **fully autonomous weapons systems** [2][16]. Anthropic had maintained these safeguards since signing a contract with the Pentagon in 2025, specifically to prevent its technology from being used for mass surveillance [10].
+
+
+...
+
+> Full response and sources: [`examples/anthropic-2026.md`](examples/anthropic-2026.md)
+
+
 ## Engineering Notes
 
 1. **Heuristic Search Filtering**: In `search.py`, the agent applies a specific set of filters to Tavily results. It excludes content that is too short (<100 chars), too long (>3000 chars), or contains specific mathematical/encoding artifacts (e.g., `⊤`, `∫`, `−D/2`). This prevents the synthesis model from being overwhelmed by noise or low-quality scraped data.
