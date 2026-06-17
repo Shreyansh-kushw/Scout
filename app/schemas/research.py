@@ -1,10 +1,17 @@
 from pydantic import BaseModel
 
-class research(BaseModel):
+class ResearchRequest(BaseModel):
+
+    question: str
+
+class SourceItem(BaseModel):
+    title: str
+    url: str
+
+class ResearchResponse(BaseModel):
 
     question: str
     queries: list[str]
-    search_results: list[dict]
-    gaps: list[str]
     iterations: int
-    final_response: str
+    sources: list[SourceItem]
+    report: str
