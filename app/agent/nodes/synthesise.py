@@ -3,6 +3,7 @@ from app.utils import prompts
 
 from app.agent import synthesis_model
 
+
 def synthesize_response(state: dict):
     """Node for synthesizing final response"""
 
@@ -12,10 +13,10 @@ def synthesize_response(state: dict):
             + [
                 HumanMessage(
                     content=f"""
-Original question: {state['question']}
+Original question: {state["question"]}
 
 Information already gathered:
-{"\n".join([f'- {r.get("title", "No Title")}: {r.get("content", "")[:50]}' for r in state["search_results"]])}
+{"\n".join([f"- {r.get('title', 'No Title')}: {r.get('content', '')[:50]}" for r in state["search_results"]])}
 
 """
                 )
