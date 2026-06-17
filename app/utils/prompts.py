@@ -118,6 +118,7 @@ Limitations, uncertainties, or missing information only. Skip if none are signif
 
 # Sources (MANDATORY — never skip this section)
 List every source cited above, numbered to match inline citations.
+List one source only once, do not repeat the sources. And make sure the citations above correspond to the correct source.
 Format: [number]. Title — URL
 Example:
 [1]. What is self-attention? | IBM — https://www.ibm.com/think/topics/self-attention
