@@ -13,7 +13,7 @@ async def research_query(
 ):
     if question:
 
-        response = agent.invoke({"question": question})
+        response = await agent.ainvoke({"question": question})
         result = ResearchResponse(
             question= response["question"],
             queries=response["queries"],

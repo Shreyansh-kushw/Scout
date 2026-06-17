@@ -33,4 +33,4 @@ Based on the above, identify any gaps as a JSON array. If sufficient, return [].
     except Exception as e:
         print("The following exception encountered while finding gaps:", e)
 
-    return {"gaps": gaps}
+    return {"gaps": gaps, "queries": gaps}

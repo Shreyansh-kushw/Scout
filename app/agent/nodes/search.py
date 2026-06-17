@@ -12,7 +12,7 @@ def search_query(state: dict) -> dict:
     results = []
     queries_to_search = state.get("gaps") if state.get("gaps") else state["queries"]
     for query in queries_to_search:
-        print(query)
+        print("Searching query:", query)
         response = tavily_client.search(query=query, max_results=5)
 
         for r in response["results"]:

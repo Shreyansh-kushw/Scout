@@ -4,7 +4,7 @@ import operator
 
 class ResearchState(TypedDict):
     question: str
-    queries: list[str]
+    queries: Annotated[list[str], operator.add]
     search_results: Annotated[list[dict], operator.add]
     gaps: list[str]
     iterations: int

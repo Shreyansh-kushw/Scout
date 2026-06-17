@@ -66,6 +66,8 @@ Guidelines:
 - Do not explain your reasoning.
 - Do not include any text other than the required output.
 - A gap should only be returned if obtaining the information would materially improve the completeness, accuracy, or confidence of the final answer.
+- For broad geopolitical questions, maximum 3 gap queries per iteration. 
+- Prefer breadth over depth in gap identification.
 
 Output:
 Return ONLY a JSON array of strings.
@@ -102,6 +104,7 @@ Requirements:
    - Place citations immediately after the statement they support.
    - Never invent citations. Never cite sources that don't support the claim.
    - Citation format: [1][3][6] — each number in its own bracket, no commas, no spaces between brackets.
+   - Use maximum 3 citations per claim.
 
 7. If the question asks for a recommendation: state it clearly, explain tradeoffs, explain when it would change.
 8. If the question asks for a comparison: include a comparison table, highlight differences, conclude with best-fit scenarios.
@@ -117,9 +120,6 @@ Structure and Formatting Rules:
 - Leave a blank line before and after every header, bullet list, and paragraph block.
 - For comparisons, always use a markdown table with aligned columns.
 - Do not use HTML tags. Pure markdown only.
-
-## Question
-The question asked by the user (stated as it was).
 
 ## Answer
 Direct, comprehensive answer with inline citations. Cover all aspects here.
