@@ -1,11 +1,20 @@
 from fastapi import FastAPI, Query, status
 from fastapi.exceptions import HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Annotated
 
 from app.agent import agent
 from app.schemas.research import ResearchResponse, SourceItem
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/research", response_model= ResearchResponse)
 async def research_query(

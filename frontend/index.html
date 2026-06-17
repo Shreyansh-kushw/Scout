@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scout - Research Agent</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Scout</h1>
+        </header>
+
+        <main>
+            <div class="search-section">
+                <div class="search-box-container">
+                    <input type="text" id="query-input" placeholder="What do you want to research? e.g. What is the current state of quantum computing?" />
+                    <button id="research-btn">Research</button>
+                </div>
+                <p id="error-message" class="error-hidden">Query must be at least 10 characters long.</p>
+            </div>
+
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Scouring the web for answers...</p>
+            </div>
+
+            <div id="result-container" class="hidden">
+                <div id="markdown-content"></div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
